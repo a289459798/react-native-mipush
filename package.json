@@ -1,0 +1,23 @@
+{
+  "name": "react-native-mipush",
+  "version": "0.0.1",
+  "description": "集成小米推送",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a289459798/react-native-mipush.git"
+  },
+  "keywords": [
+    "react-native",
+    "mipush"
+  ],
+  "author": "zzy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/a289459798/react-native-mipush/issues"
+  },
+  "homepage": "https://github.com/a289459798/react-native-mipush#readme"
+}
