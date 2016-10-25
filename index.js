@@ -7,11 +7,11 @@
 import {
     NativeModules,
     Platform,
-    PushNotificationIOS
+    PushNotificationIOS,
+    NativeEventEmitter
 } from 'react-native';
 
-const NativeEventEmitter = require('NativeEventEmitter');
-var MIPushModule = NativeModules.MIPushModule;
+const MIPushModule = NativeModules.MIPushModule;
 
 /**
  * 获取app的版本名称\版本号和渠道名

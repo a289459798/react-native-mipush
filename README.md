@@ -1,6 +1,8 @@
 # react-native-mipush
 
-[TOC]
+该项目基于小米推送，使用前，请先在小米开发者后台注册app，并获取对应的appid与appkey。
+
+开发环信：xcode8、react-native 0.35
 
 ##安装
 
@@ -54,11 +56,109 @@ protected List<ReactPackage> getPackages() {
 
 ##ios
 
-==正在开发，待更新==
+==必须通过xcode8开发的项目==
+
+ios需要先制作推送证书，具体教程请自行百度。
+
+本项目是基于`RCTPushNotification`，请将RCTPushNotification拖动到`Libraries`目录下。
+
+添加所需依赖库：
+- UserNotifications.framework
+- libresolv.dylib(tbd)
+- libxml2.dylib(tbd)
+- libz.dylib(tbd)
+- SystemConfiguration.framework
+- MobileCoreServices.framework
+- CFNetwork.framework
+- CoreTelephony.framework
+
+在`target`的`Capabilities`选项卡打开`Push Notifications`
+
+在`target`的`Build Phases`选项卡添加`Link Binary With Libraries`:
+
+> libRCTPushNotification.a
+> libRCTMIPushModule.a
+
+在targets->Build Settings下面搜索 Header Search Paths，添加
+
+> $(SRCROOT)/../node_modules/react-native-mipush/ios/MIPushModule
+>
+> $(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS
+
+设置为 `recursive`
+
+打开工程下`Info.plist`文件为源代码形式打开，添加以下信息:
+
+```
+<key>MiSDKAppID</key>
+<string>1000888</string>
+<key>MiSDKAppKey</key>
+<string>500088888888</string>
+<key>MiSDKRun</key>
+<string>Online</string>
+```
+
+修改 AppDelegate.m 文件：
+
+```
+...
+#import "MIPushModule.h"
+#import "RCTPushNotificationManager.h"
+...
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+	...
+  	[MIPushModule application:application didFinishLaunchingWithOptions:launchOptions];
+    ...
+}
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+
+  [MIPushModule application:application didRegisterUserNotificationSettings:notificationSettings];
+  ...
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+  [MIPushModule application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+  ...
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification
+{
+  [MIPushModule application:application didReceiveRemoteNotification:notification];
+  ...
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+  [MIPushModule application:application didReceiveLocalNotification:notification];
+  ...
+}
+
+// ios 10
+// 应用在前台收到通知
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+  [MIPushModule userNotificationCenter:center willPresentNotification:notification withCompletionHandler:completionHandler];
+  ...
+}
+
+// 点击通知进入应用
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+  [MIPushModule userNotificationCenter:center didReceiveNotificationResponse:response withCompletionHandler:completionHandler];
+  ....
+  completionHandler();
+}
+
+```
+
 
 ##RN中使用
 
 Demo：
+
+**android**
 
 ```
 ...
@@ -94,6 +194,38 @@ componentDidMount() {
     });
 
   }
+```
+
+**ios**
+
+```
+...
+componentWillUnmount() {
+
+    MIPush.unsetAlias("bbbbbb");
+    MIPush.removeEventListener("notification");
+  }
+
+  componentDidMount() {
+
+    MIPush.setAlias("bbbbbb");
+
+	MIPush.setBadgeNumber(0);   // 每次进入app将角标设置为0
+    MIPush.addEventListener("notification", (notification) => {
+
+      console.log("app接收到通知:", notification);
+      
+      // 弹出确认框
+    });
+
+    MIPush.getInitialNotification((notification) => {
+
+      console.log("app关闭时获取点击通知消息:", notification);
+	  // 弹出确认框
+    });
+
+  }
+  ...
 ```
 
 暂支持的所有方法：
