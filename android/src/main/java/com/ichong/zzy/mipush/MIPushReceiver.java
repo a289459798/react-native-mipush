@@ -35,6 +35,7 @@ public class MIPushReceiver extends PushMessageReceiver {
 
         Intent intent = new Intent();
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
         if(MIPushPackage.sReactContext == null) {
             // 将数据保存
             MIPushPackage.sMiPushMessage = miPushMessage;
@@ -47,8 +48,16 @@ public class MIPushReceiver extends PushMessageReceiver {
         }
         sendListener("xmpush_click", miPushMessage);
 
-        intent.setClass(context, MIPushPackage.sReactContext.getCurrentActivity().getClass());
-        context.startActivity(intent);
+        if(MIPushPackage.sReactContext.getCurrentActivity() != null) {
+
+            intent.setClass(context, MIPushPackage.sReactContext.getCurrentActivity().getClass());
+            context.startActivity(intent);
+        } else {
+
+            String packageName = context.getApplicationContext().getPackageName();
+            Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+            context.startActivity(launchIntent);
+        }
 
     }
 

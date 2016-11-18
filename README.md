@@ -2,7 +2,7 @@
 
 该项目基于小米推送，使用前，请先在小米开发者后台注册app，并获取对应的appid与appkey。
 
-开发环信：xcode8、react-native 0.35
+开发环境：xcode8、react-native 0.35
 
 ##作者
 
@@ -13,15 +13,15 @@ QQ群: 161263093
 
 ##安装
 
-==暂未上传到npm，待更新==
+npm install react-native-xmpush --save
 
 ##android
 
 打开`android`工程，`settings.gradle`，增加代码：
 
 ```
-include ':react-native-mipush'
-project(':react-native-mipush').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-mipush/android')
+include ':react-native-xmpush'
+project(':react-native-xmpush').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-xmpush/android')
 
 ```
 修改`app`下面的的`build.gradle`，在`dependencies`区块下增加代码：
@@ -29,7 +29,7 @@ project(':react-native-mipush').projectDir = new File(rootProject.projectDir, '.
 ```
 dependencies {
     ...
-    compile project(':react-native-mipush')
+    compile project(':react-native-xmpush')
 }
 ```
 修改`MainApplication`文件，修改`getPackages`方法，添加`MIPushPackage`：
@@ -88,7 +88,7 @@ ios需要先制作推送证书，具体教程请自行百度。
 
 在targets->Build Settings下面搜索 Header Search Paths，添加
 
-> $(SRCROOT)/../node_modules/react-native-mipush/ios/MIPushModule
+> $(SRCROOT)/../node_modules/react-native-xmpush/ios/RCTMIPushModule
 >
 > $(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS
 
@@ -116,44 +116,44 @@ ios需要先制作推送证书，具体教程请自行百度。
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	...
-  	[MIPushModule application:application didFinishLaunchingWithOptions:launchOptions];
+  	[RCTMIPushModule application:application didFinishLaunchingWithOptions:launchOptions];
     ...
 }
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
 
-  [MIPushModule application:application didRegisterUserNotificationSettings:notificationSettings];
+  [RCTMIPushModule application:application didRegisterUserNotificationSettings:notificationSettings];
   ...
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-  [MIPushModule application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+  [RCTMIPushModule application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
   ...
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification
 {
-  [MIPushModule application:application didReceiveRemoteNotification:notification];
+  [RCTMIPushModule application:application didReceiveRemoteNotification:notification];
   ...
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-  [MIPushModule application:application didReceiveLocalNotification:notification];
+  [RCTMIPushModule application:application didReceiveLocalNotification:notification];
   ...
 }
 
 // ios 10
 // 应用在前台收到通知
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
-  [MIPushModule userNotificationCenter:center willPresentNotification:notification withCompletionHandler:completionHandler];
+  [RCTMIPushModule userNotificationCenter:center willPresentNotification:notification withCompletionHandler:completionHandler];
   ...
 }
 
 // 点击通知进入应用
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
-  [MIPushModule userNotificationCenter:center didReceiveNotificationResponse:response withCompletionHandler:completionHandler];
+  [RCTMIPushModule userNotificationCenter:center didReceiveNotificationResponse:response withCompletionHandler:completionHandler];
   ....
   completionHandler();
 }

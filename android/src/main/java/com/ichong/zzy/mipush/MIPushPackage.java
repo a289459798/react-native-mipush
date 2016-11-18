@@ -29,9 +29,6 @@ public class MIPushPackage implements ReactPackage {
     public static ReactApplicationContext sReactContext;
     public static MiPushMessage sMiPushMessage;
 
-
-
-
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
 
