@@ -111,7 +111,7 @@ class MIPush extends NativeEventEmitter {
             PushNotificationIOS.removeEventListener(type);
         } else {
 
-            this.removeEventListener(type);
+            this.removeListener(type);
         }
     }
 
