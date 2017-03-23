@@ -13,41 +13,16 @@ QQ群: 161263093
 
 ##安装
 
+````
 npm install react-native-xmpush --save
+react-native link
+```
 
 ##android
 
-打开`android`工程，`settings.gradle`，增加代码：
+项目的`AndroidManifest.xml`文件中增加下面代码：
 
-```
-include ':react-native-xmpush'
-project(':react-native-xmpush').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-xmpush/android')
-
-```
-修改`app`下面的的`build.gradle`，在`dependencies`区块下增加代码：
-
-```
-dependencies {
-    ...
-    compile project(':react-native-xmpush')
-}
-```
-修改`MainApplication`文件，修改`getPackages`方法，添加`MIPushPackage`：
-
-```
-@Override
-protected List<ReactPackage> getPackages() {
-
-  return Arrays.<ReactPackage>asList(
-      ...
-      new MIPushPackage()
-  );
-}
-```
-
-最后在项目的`AndroidManifest.xml`文件中增加下面代码：
-
-```
+```xml
 // 一下代码放在 applacation 标签下
 <meta-data android:name="MIPUSH_APPID" android:value=":1111"/>
         <meta-data android:name="MIPUSH_APPKEY" android:value=":2222"/>
@@ -58,8 +33,6 @@ protected List<ReactPackage> getPackages() {
 // 千万注意要保留数字前面的冒号
 ```
 
-
-以上，android的集成完成。
 
 ##ios
 
@@ -107,7 +80,7 @@ ios需要先制作推送证书，具体教程请自行百度。
 
 修改 AppDelegate.m 文件：
 
-```
+```oc
 ...
 #import "MIPushModule.h"
 #import "RCTPushNotificationManager.h"
@@ -167,7 +140,7 @@ Demo：
 
 **android**
 
-```
+```js
 ...
 
 import MIPush from 'react-native-mipush';
@@ -205,7 +178,7 @@ componentDidMount() {
 
 **ios**
 
-```
+```js
 ...
 componentWillUnmount() {
 
@@ -237,7 +210,7 @@ componentWillUnmount() {
 
 暂支持的所有方法：
 
-```
+```js
 /**
  * 设置别名
  * @param text
