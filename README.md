@@ -13,7 +13,7 @@ QQ群: 161263093
 
 ##安装
 
-````
+```
 npm install react-native-xmpush --save
 react-native link
 ```
