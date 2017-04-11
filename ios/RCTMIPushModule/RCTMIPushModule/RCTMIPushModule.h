@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
-#import "RCTBridgeModule.h"
+#import <React/RCTBridgeModule.h>
 #import "RCTPushNotificationManager.h"
 #import "MiPushSDK.h"
 
