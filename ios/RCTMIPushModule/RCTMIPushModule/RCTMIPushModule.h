@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
-#import <React/RCTBridgeModule.h>
-#import <React/RCTPushNotificationManager.h>
+#import "RCTBridgeModule.h"
+#import "RCTPushNotificationManager.h"
 #import "MiPushSDK.h"
 
 @interface RCTMIPushModule : NSObject <RCTBridgeModule, MiPushSDKDelegate>

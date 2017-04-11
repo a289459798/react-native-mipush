@@ -86,7 +86,7 @@ ios需要先制作推送证书，具体教程请自行百度。
 
 ```oc
 ...
-#import "MIPushModule.h"
+#import "RCTMIPushModule.h"
 #import "RCTPushNotificationManager.h"
 ...
 
