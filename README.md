@@ -2,7 +2,7 @@
 
 该项目基于小米推送，使用前，请先在小米开发者后台注册app，并获取对应的appid与appkey。
 
-开发环境：xcode8、react-native 0.35
+开发环境：xcode8、react-native
 
 ##作者
 
@@ -14,7 +14,11 @@ QQ群: 161263093
 ##安装
 
 ```
-npm install react-native-xmpush --save
+// rn > 0.4.x
+npm install react-native-xmpush --save 
+
+// rn < 0.4.x
+npm install react-native-xmpush@0.1.2 --save 
 react-native link
 ```
 
