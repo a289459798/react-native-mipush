@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
-#import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 #import "RCTPushNotificationManager.h"
 #import "MiPushSDK.h"
 
-@interface RCTMIPushModule : NSObject <RCTBridgeModule, MiPushSDKDelegate>
+@interface RCTMIPushModule : RCTEventEmitter <RCTBridgeModule, MiPushSDKDelegate>
 
 + (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 

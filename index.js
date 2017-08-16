@@ -97,7 +97,17 @@ class MIPush extends NativeEventEmitter {
 
         if(Platform.OS == 'ios') {
 
-            PushNotificationIOS.addEventListener(type, handler);
+            switch (type) {
+                case "notification":
+                case "localNotification":
+                case "register":
+                    PushNotificationIOS.addEventListener(type, handler);
+                    break;
+                default:
+                    this.addListener(type, handler);
+                    break;
+            }
+
         } else {
 
             this.addListener(type, handler);
@@ -108,7 +118,17 @@ class MIPush extends NativeEventEmitter {
 
         if(Platform.OS == 'ios') {
 
-            PushNotificationIOS.removeEventListener(type);
+            switch (type) {
+                case "notification":
+                case "localNotification":
+                case "register":
+                    PushNotificationIOS.removeEventListener(type);
+                    break;
+                default:
+                    this.removeListener(type);
+                    break;
+            }
+
         } else {
 
             this.removeListener(type);
