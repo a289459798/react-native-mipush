@@ -2,9 +2,17 @@ package com.ichong.zzy.mipush;
 
 import android.content.Context;
 import android.content.Intent;
+
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.xiaomi.mipush.sdk.ErrorCode;
+import com.xiaomi.mipush.sdk.MiPushClient;
+import com.xiaomi.mipush.sdk.MiPushCommandMessage;
 import com.xiaomi.mipush.sdk.MiPushMessage;
 import com.xiaomi.mipush.sdk.PushMessageReceiver;
+
+import java.util.List;
 
 /**
  * Created by zzy on 16/8/13.
@@ -88,7 +96,10 @@ public class MIPushReceiver extends PushMessageReceiver {
         String cmdArg1 = ((arguments != null && arguments.size() > 0) ? arguments.get(0) : null);
         if (MiPushClient.COMMAND_REGISTER.equals(command)) {
             if (message.getResultCode() == ErrorCode.SUCCESS) {
-                sendListener("RemoteNotificationsRegistered", cmdArg1);
+                WritableMap param = Arguments.createMap();
+                param.putString("deviceToken", cmdArg1);
+                MIPushPackage.sReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("RemoteNotificationsRegistered", param);
+
             }
         }
     }
