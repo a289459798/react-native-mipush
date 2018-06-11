@@ -84,7 +84,7 @@ public class MIPushReceiver extends PushMessageReceiver {
     @Override
     onReceiveRegisterResult(Context context, MiPushCommandMessage message) {
         super.onReceiveRegisterResult(context, message);
-        sendListener("register", message);
+        sendListener("RemoteNotificationsRegistered", message);
     }
 
 }
