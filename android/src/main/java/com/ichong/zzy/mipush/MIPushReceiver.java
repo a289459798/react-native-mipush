@@ -82,9 +82,15 @@ public class MIPushReceiver extends PushMessageReceiver {
         注册regid消息
     */
     @Override
-    onReceiveRegisterResult(Context context, MiPushCommandMessage message) {
-        super.onReceiveRegisterResult(context, message);
-        sendListener("RemoteNotificationsRegistered", message);
+    public void onReceiveRegisterResult(Context context, MiPushCommandMessage message) {
+        String command = message.getCommand();
+        List<String> arguments = message.getCommandArguments();
+        String cmdArg1 = ((arguments != null && arguments.size() > 0) ? arguments.get(0) : null);
+        if (MiPushClient.COMMAND_REGISTER.equals(command)) {
+            if (message.getResultCode() == ErrorCode.SUCCESS) {
+                sendListener("RemoteNotificationsRegistered", cmdArg1);
+            }
+        }
     }
 
 }
