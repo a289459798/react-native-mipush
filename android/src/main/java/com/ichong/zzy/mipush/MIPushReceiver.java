@@ -78,4 +78,13 @@ public class MIPushReceiver extends PushMessageReceiver {
         MIPushPackage.sReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(type, MIPushHelper.parsePushMessage(miPushMessage));
     }
 
+    /*
+        注册regid消息
+    */
+    @Override
+    onReceiveRegisterResult(Context context, MiPushCommandMessage message) {
+        super.onReceiveRegisterResult(context, message);
+        sendListener("register", message);
+    }
+
 }
