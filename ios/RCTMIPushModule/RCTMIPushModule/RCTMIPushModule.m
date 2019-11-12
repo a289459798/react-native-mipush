@@ -101,6 +101,7 @@ RCT_EXPORT_METHOD(unsetAccount:(NSString *)text)
 
         [RCTPushNotificationManager didReceiveRemoteNotification:userInfo];
     }
+    completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
 }
 
 // 点击通知进入应用
