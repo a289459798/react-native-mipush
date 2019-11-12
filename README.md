@@ -14,8 +14,11 @@ QQ群: 161263093
 ##安装
 
 ```
-// rn > 0.4.x
+// rn > 0.6.x
 npm install react-native-xmpush --save 
+
+// rn > 0.4.x
+npm install react-native-xmpush@0.2.4 --save 
 
 // rn < 0.4.x
 npm install react-native-xmpush@0.1.2 --save 

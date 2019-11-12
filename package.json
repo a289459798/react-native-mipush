@@ -1,6 +1,6 @@
 {
   "name": "react-native-xmpush",
-  "version": "0.2.4",
+  "version": "1.0.0",
   "description": "集成小米推送",
   "main": "index.js",
   "scripts": {
