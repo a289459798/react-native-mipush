@@ -10,8 +10,8 @@
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
 #import <React/RCTEventEmitter.h>
-#import "RCTPushNotificationManager.h"
 #import "MiPushSDK.h"
+#import <RNCPushNotificationIOS.h>
 
 @interface RCTMIPushModule : RCTEventEmitter <RCTBridgeModule, MiPushSDKDelegate>
 
