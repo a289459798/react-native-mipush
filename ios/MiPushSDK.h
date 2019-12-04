@@ -36,45 +36,9 @@
  */
 - (void)miPushReceiveNotification:(NSDictionary*)data;
 
-/**
- * 长连接状态变化回调
- * 网络环境变化，或长连接异常才会触发offline
- * 应用前后台切换，不会触发回调
- */
-- (void)miPushConnectionOnline;
-- (void)miPushConnectionOffline;
-
-
 @end
 
-typedef NS_ENUM(NSUInteger, MiPushSDKRegionType) {
-    MiPushSDKRegionTypeChina = 0,
-    MiPushSDKRegionTypeEurope,
-    MiPushSDKRegionTypeRussia,
-    MiPushSDKRegionTypeOther,
-};
-
 @interface MiPushSDK : NSObject
-
-
-/**
- * 设置 RegionType
- * @param
- *     MiPushSDKRegionType: region 类型，目前支持中国/欧洲/新加坡
- */
-+ (void)setRegionType:(MiPushSDKRegionType)regionType;
-
-/**
- * 获取当前 RegionType
- */
-
-+ (MiPushSDKRegionType)getRegionType;
-
-/**
- * 获取当前 RegionType 对应的 string
- */
-
-+ (NSString *)getRegion;
 
 /**
  * 客户端注册设备
@@ -91,15 +55,6 @@ typedef NS_ENUM(NSUInteger, MiPushSDKRegionType) {
  * 客户端设备注销
  */
 + (void)unregisterMiPush;
-
-/**
- *
- * 配置是否在后台需要长连接，如果需要长连接，需要保证在后台app仍处于活跃状态
- * @param
- *      enable: 是否需要长连接
- *
- */
-+ (void)needConnectInBackground:(BOOL)enable;
 
 
 /**
@@ -181,7 +136,7 @@ typedef NS_ENUM(NSUInteger, MiPushSDKRegionType) {
  * @param 
  *      messageId:Payload里面对应的miid参数
  */
-+ (void)openAppNotify:(NSString *)messageId __deprecated;
++ (void)openAppNotify:(NSString *)messageId;
 
 
 /**
@@ -219,17 +174,4 @@ typedef NS_ENUM(NSUInteger, MiPushSDKRegionType) {
  * 如果没有RegId返回nil
  */
 + (NSString*)getRegId;
-
-/**
- * 设置自定义bundle path
- * 默认为nil，获取当前SDK所在的bundle路径
- */
-+ (void)setBundlePath:(NSString *)path;
-
-/**
- * 获取自定义bundle path
- * 如果没有返回nil
- */
-+ (NSString*)getBundlePath;
-
 @end
