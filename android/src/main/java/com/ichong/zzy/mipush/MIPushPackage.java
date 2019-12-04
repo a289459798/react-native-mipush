@@ -34,40 +34,6 @@ public class MIPushPackage implements ReactPackage {
 
         List<NativeModule> modules = new ArrayList<>();
 
-
-        try {
-            String appId = MIPushHelper.getMIPushValue(reactContext.getApplicationContext(), "MIPUSH_APPID");
-            String appKey = MIPushHelper.getMIPushValue(reactContext.getApplicationContext(), "MIPUSH_APPKEY");
-
-            if (shouldInit(reactContext.getApplicationContext())) {
-
-                MiPushClient.registerPush(reactContext.getApplicationContext(), appId, appKey);
-            }
-
-            //打开Log
-            LoggerInterface newLogger = new LoggerInterface() {
-
-                @Override
-                public void setTag(String tag) {
-                    // ignore
-                }
-
-                @Override
-                public void log(String content, Throwable t) {
-                    Log.d(TAG, content, t);
-                }
-
-                @Override
-                public void log(String content) {
-                    Log.d(TAG, content);
-                }
-            };
-            Logger.setLogger(reactContext, newLogger);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         sReactContext = reactContext;
 
         modules.add(new MIPushModule(reactContext));
@@ -78,19 +44,6 @@ public class MIPushPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Collections.emptyList();
-    }
-
-    private boolean shouldInit(Context context) {
-        ActivityManager am = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE));
-        List<ActivityManager.RunningAppProcessInfo> processInfos = am.getRunningAppProcesses();
-        String mainProcessName = context.getPackageName();
-        int myPid = Process.myPid();
-        for (ActivityManager.RunningAppProcessInfo info : processInfos) {
-            if (info.pid == myPid && mainProcessName.equals(info.processName)) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

@@ -8,7 +8,8 @@ import {
     NativeModules,
     Platform,
     PushNotificationIOS,
-    NativeEventEmitter
+    NativeEventEmitter,
+    PermissionsAndroid,
 } from 'react-native';
 
 const MIPushModule = NativeModules.MIPushModule;
@@ -19,11 +20,28 @@ const MIPushModule = NativeModules.MIPushModule;
 class MIPush extends NativeEventEmitter {
 
     // 构造
-      constructor(props) {
+    constructor(props) {
         super(MIPushModule);
         // 初始状态
         this.state = {};
-      }
+    }
+
+    init(appid, appkey) {
+
+        if (Platform.OS == 'android') {
+            PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE).then((state) => {
+                if (state) {
+                    MIPushModule.init(appid, appkey);
+                } else {
+                    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE).then((granted) => {
+                        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                            MIPushModule.init(appid, appkey);
+                        }
+                    });
+                }
+            });
+        }
+    }
 
     /**
      * 设置别名
@@ -95,12 +113,12 @@ class MIPush extends NativeEventEmitter {
      */
     addEventListener(type, handler) {
 
-        if(Platform.OS == 'ios') {
+        if (Platform.OS == 'ios') {
 
             switch (type) {
-                case "notification":
-                case "localNotification":
-                case "register":
+                case 'notification':
+                case 'localNotification':
+                case 'register':
                     PushNotificationIOS.addEventListener(type, handler);
                     break;
                 default:
@@ -116,12 +134,12 @@ class MIPush extends NativeEventEmitter {
 
     removeEventListener(type) {
 
-        if(Platform.OS == 'ios') {
+        if (Platform.OS == 'ios') {
 
             switch (type) {
-                case "notification":
-                case "localNotification":
-                case "register":
+                case 'notification':
+                case 'localNotification':
+                case 'register':
                     PushNotificationIOS.removeEventListener(type);
                     break;
                 default:
@@ -141,23 +159,19 @@ class MIPush extends NativeEventEmitter {
      */
     presentLocalNotification(notification) {
 
-        if(Platform.OS == 'ios') {
+        if (Platform.OS == 'ios') {
 
             PushNotificationIOS.presentLocalNotification({
 
                 alertBody: notification.alertBody,
-                alertAction: "查看",
-                category: "push",
-                userInfo: notification.userInfo
+                alertAction: '查看',
+                category: 'push',
+                userInfo: notification.userInfo,
 
             });
         } else {
 
-            MIPushModule.presentLocalNotification({
-
-
-
-            });
+            MIPushModule.presentLocalNotification({});
         }
     }
 
@@ -169,7 +183,7 @@ class MIPush extends NativeEventEmitter {
      */
     clearNotification(notifyId) {
 
-        if(Platform.OS == 'ios') {
+        if (Platform.OS == 'ios') {
 
             PushNotificationIOS.cancelLocalNotifications(notifyId);
         } else {
@@ -184,7 +198,7 @@ class MIPush extends NativeEventEmitter {
      */
     clearNotifications() {
 
-        if(Platform.OS == 'ios') {
+        if (Platform.OS == 'ios') {
 
             PushNotificationIOS.cancelAllLocalNotifications();
         } else {
@@ -199,7 +213,7 @@ class MIPush extends NativeEventEmitter {
      */
     setBadgeNumber(num) {
 
-        if(Platform.OS == 'ios') {
+        if (Platform.OS == 'ios') {
 
             PushNotificationIOS.setApplicationIconBadgeNumber(num);
         }
@@ -212,7 +226,7 @@ class MIPush extends NativeEventEmitter {
      */
     getInitialNotification(handler) {
 
-        if(Platform.OS == 'ios') {
+        if (Platform.OS == 'ios') {
 
             PushNotificationIOS.getInitialNotification()
                 .then(handler);
