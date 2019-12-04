@@ -31,12 +31,26 @@ class MIPush extends NativeEventEmitter {
         if (Platform.OS == 'android') {
             PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE).then((state) => {
                 if (state) {
-                    MIPushModule.init(appid, appkey);
-                } else {
-                    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE).then((granted) => {
-                        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                    PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE).then((state) => {
+                        if (state) {
+
                             MIPushModule.init(appid, appkey);
+                        } else {
+                            PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE).then((granted) => {
+                                if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                                    MIPushModule.init(appid, appkey);
+                                }
+                            });
                         }
+                    });
+                } else {
+                    PermissionsAndroid.requestMultiple([
+                        PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE,
+                        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+                    ]).then((granted) => {
+                        // if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                        MIPushModule.init(appid, appkey);
+                        // }
                     });
                 }
             });
