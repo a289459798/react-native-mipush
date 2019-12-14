@@ -7,12 +7,12 @@
 import {
     NativeModules,
     Platform,
-    PushNotificationIOS,
     NativeEventEmitter,
     PermissionsAndroid,
 } from 'react-native';
 
 const MIPushModule = NativeModules.MIPushModule;
+import PushNotificationIOS from '@react-native-community/push-notification-ios'
 
 /**
  * 获取app的版本名称\版本号和渠道名

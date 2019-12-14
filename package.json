@@ -1,23 +1,54 @@
 {
-  "name": "react-native-xmpush",
-  "version": "2.0.0",
+  "_from": "react-native-xmpush@2.0.0",
+  "_id": "react-native-xmpush@2.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-IjhmAgVg5P/ucQR4AeSdSNx74ovV5+ipvfWDA/IVMPopGy8ec/yZCS2soMfyeZCi/jxu/i3YX7TmZtUbPe9ADg==",
+  "_location": "/react-native-xmpush",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "react-native-xmpush@2.0.0",
+    "name": "react-native-xmpush",
+    "escapedName": "react-native-xmpush",
+    "rawSpec": "2.0.0",
+    "saveSpec": null,
+    "fetchSpec": "2.0.0"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-xmpush/-/react-native-xmpush-2.0.0.tgz",
+  "_shasum": "cfddae80eddc111aa74294b5b4c3b0df5b6247ee",
+  "_spec": "react-native-xmpush@2.0.0",
+  "_where": "/Users/zhangzy/workspace/android/5ichong/academy",
+  "author": {
+    "name": "zzy"
+  },
+  "bugs": {
+    "url": "https://github.com/a289459798/react-native-mipush/issues"
+  },
+  "bundleDependencies": false,
+  "peerDependencies": {
+    "@react-native-community/push-notification-ios": "^1.0.3"
+  },
+  "deprecated": false,
   "description": "集成小米推送",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/a289459798/react-native-mipush.git"
-  },
+  "homepage": "https://github.com/a289459798/react-native-mipush#readme",
   "keywords": [
     "react-native",
     "mipush"
   ],
-  "author": "zzy",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/a289459798/react-native-mipush/issues"
+  "main": "index.js",
+  "name": "react-native-xmpush",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a289459798/react-native-mipush.git"
   },
-  "homepage": "https://github.com/a289459798/react-native-mipush#readme"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.0.0"
 }
