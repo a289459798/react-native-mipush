@@ -87,6 +87,18 @@ class MIPush extends NativeEventEmitter {
         MIPushModule.unsetAccount(text);
     }
 
+    enablePush() {
+        if (Platform.OS == 'android') {
+            MIPushModule.enablePush();
+        }
+    }
+
+    disablePush() {
+        if (Platform.OS == 'android') {
+            MIPushModule.disablePush();
+        }
+    }
+
     /**
      *
      * @param type

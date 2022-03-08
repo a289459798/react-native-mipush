@@ -102,6 +102,17 @@ public class MIPushModule extends ReactContextBaseJavaModule {
         MiPushClient.setAlias(mContext, text, null);
     }
 
+    @ReactMethod
+    public void disablePush() {
+
+        MiPushClient.disablePush(mContext);
+    }
+
+    @ReactMethod
+    public void enablePush() {
+
+        MiPushClient.enablePush(mContext);
+    }
 
     @ReactMethod
     public void presentLocalNotification(ReadableMap notification) {
