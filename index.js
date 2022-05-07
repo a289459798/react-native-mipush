@@ -17,7 +17,7 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios'
 /**
  * 获取app的版本名称\版本号和渠道名
  */
-class MIPush extends NativeEventEmitter {
+class MIPushEventEmitter extends NativeEventEmitter {
 
     // 构造
     constructor(props) {
@@ -241,6 +241,13 @@ class MIPush extends NativeEventEmitter {
 
 }
 
-MIPush = new MIPush();
+let MIPush = null;
+// 确保在有值的情况下
+if(MIPushModule) {
+    MIPush = new MIPushEventEmitter();
+}else  {
+    console.warn('MIPushModule is null');
+}
+
 
 module.exports = MIPush;
