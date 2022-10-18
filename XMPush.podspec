@@ -19,4 +19,5 @@ Pod::Spec.new do |s|
 
   s.dependency 'React'
   s.dependency 'RNCPushNotificationIOS'
+  s.dependency "UMPush", "4.0.3"
 end
