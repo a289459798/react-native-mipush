@@ -17,6 +17,8 @@ Pod::Spec.new do |s|
   s.ios.vendored_libraries = 'ios/*.a'
   s.preserve_paths  = "**/*.js"
 
+  s.frameworks = 'UserNotifications','SystemConfiguration','MobileCoreServices','CFNetwork','CoreTelephony'
+  s.library = 'resolv','xml2','z'
   s.dependency 'React'
   s.dependency 'RNCPushNotificationIOS'
   s.dependency "UMPush", "4.0.3"

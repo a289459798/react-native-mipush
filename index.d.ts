@@ -1,6 +1,4 @@
-export default class MIPush {
-
-    // 构
+export default new class MIPush {
 
     init(appid: string, appkey: string);
 
