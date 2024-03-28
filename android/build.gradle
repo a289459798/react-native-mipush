@@ -20,6 +20,12 @@ android {
         abortOnError false
         warning 'InvalidPackage'
     }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
 }
 
 repositories {
@@ -30,6 +36,6 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation fileTree(dir: "libs", include: ['*.jar', '*.aar'])
     implementation 'com.facebook.react:react-native:+'
 }
