@@ -30,6 +30,8 @@ class MIPush extends NativeEventEmitter {
 
         if (Platform.OS == 'android') {
             MIPushModule.init(appid, appkey);
+        } else {
+            MIPushModule.initPush();
         }
     }
 

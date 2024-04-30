@@ -11,8 +11,25 @@
 
 @implementation RCTMIPushModule
 
+static NSDictionary *_launchOptions;
+
 RCT_EXPORT_MODULE();
 
+RCT_EXPORT_METHOD(initPush)
+{
+    NSDictionary *userInfo = _launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    if(userInfo != nil) {
+      [[NSNotificationCenter defaultCenter] postNotificationName:@"xmpush_click" object:userInfo];
+    }
+
+    UMessageRegisterEntity * entity = [[UMessageRegisterEntity alloc] init];
+    //type是对推送的几个参数的选择，可以选择一个或者多个。默认是三个全部打开，即：声音，弹窗，角标
+    entity.types = UMessageAuthorizationOptionBadge|UMessageAuthorizationOptionSound|UMessageAuthorizationOptionAlert;
+    [UMessage registerForRemoteNotificationsWithLaunchOptions:_launchOptions Entity:entity completionHandler:^(BOOL granted, NSError * _Nullable error) {
+
+    }];
+    NSLog(@"注册");
+}
 
 RCT_EXPORT_METHOD(setAlias:(NSString *)text)
 {
@@ -68,14 +85,7 @@ RCT_EXPORT_METHOD(unsetAccount:(NSString *)text)
 }
 
 + (void)application:(id)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Push组件基本功能配置
-    UMessageRegisterEntity * entity = [[UMessageRegisterEntity alloc] init];
-    //type是对推送的几个参数的选择，可以选择一个或者多个。默认是三个全部打开，即：声音，弹窗，角标
-    entity.types = UMessageAuthorizationOptionBadge|UMessageAuthorizationOptionSound|UMessageAuthorizationOptionAlert;
-    [UMessage registerForRemoteNotificationsWithLaunchOptions:launchOptions Entity:entity completionHandler:^(BOOL granted, NSError * _Nullable error) {
-
-    }];
-    NSLog(@"注册");
+    _launchOptions = launchOptions;
 }
 
 + (void)application:(id)application didRegisterUserNotificationSettings:(id)notificationSettings {
